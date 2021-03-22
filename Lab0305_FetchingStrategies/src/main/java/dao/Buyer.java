@@ -1,0 +1,63 @@
+package dao;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Buyer  implements java.io.Serializable {
+
+     private Integer id;
+     private User user;
+     private String value;
+     private Set<BuyerBuyProduct> buyerBuyProducts = new HashSet<BuyerBuyProduct>(0);
+     private Set<BuyerBidProduct> buyerBidProducts = new HashSet<BuyerBidProduct>(0);
+
+    public Buyer() {
+    }
+
+    public Buyer(User user, String value) {
+        this.user = user;
+        this.value = value;
+    }
+    public Buyer(User user, String value, Set<BuyerBuyProduct> buyerBuyProducts, Set<BuyerBidProduct> buyerBidProducts) {
+       this.user = user;
+       this.value = value;
+       this.buyerBuyProducts = buyerBuyProducts;
+       this.buyerBidProducts = buyerBidProducts;
+    }
+   
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public String getValue() {
+        return this.value;
+    }
+    
+    public void setValue(String value) {
+        this.value = value;
+    }
+    public Set<BuyerBuyProduct> getBuyerBuyProducts() {
+        return this.buyerBuyProducts;
+    }
+    
+    public void setBuyerBuyProducts(Set<BuyerBuyProduct> buyerBuyProducts) {
+        this.buyerBuyProducts = buyerBuyProducts;
+    }
+    public Set<BuyerBidProduct> getBuyerBidProducts() {
+        return this.buyerBidProducts;
+    }
+    
+    public void setBuyerBidProducts(Set<BuyerBidProduct> buyerBidProducts) {
+        this.buyerBidProducts = buyerBidProducts;
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="dao">
+    <class name="Person">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="firstName" column="first_name"/>
+        <property name="lastName" column="last_name"/>
+        <union-subclass name="Student" table="student">
+            <property name="department" column="department" type="string"/>
+        </union-subclass>
+        <union-subclass name="Teacher" table="teacher">
+            <property name="hireDate" column="hire_date" type="date"/>
+        </union-subclass>
+    </class>
+</hibernate-mapping>

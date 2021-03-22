@@ -42,13 +42,13 @@ public class Main {
         product.setSeller(seller);
         product.setFinishDate(new Date());
         product.setManufacturingDate(new Date());
-        product.setManufacturingName("Lolololo");
+        product.setManufacturingName("BMW");
         product.setOfferedDate(new Date());
 
         Category category = new Category();
 
         category.setValue("Cars");
-        category.setDescription("dsvsdvsd");
+        category.setDescription("description");
 
         session.beginTransaction();
         session.save(user1);

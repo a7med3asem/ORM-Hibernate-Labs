@@ -1,5 +1,5 @@
 package dao;// default package
-// Generated Mar 20, 2021, 11:48:12 PM by Hibernate Tools 6.0.0.Alpha2
+// Generated Mar 21, 2021, 3:37:46 PM by Hibernate Tools 6.0.0.Alpha2
 
 
 import javax.persistence.Column;

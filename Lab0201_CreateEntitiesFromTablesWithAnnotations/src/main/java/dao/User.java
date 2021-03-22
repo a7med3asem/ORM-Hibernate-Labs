@@ -1,13 +1,17 @@
-package dao;// default package
-// Generated Mar 20, 2021, 11:48:12 PM by Hibernate Tools 6.0.0.Alpha2
+package dao;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,65 +21,99 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="user"
-    ,catalog="biddingschema"
+        ,catalog="biddingschema"
 )
 public class User  implements java.io.Serializable {
 
 
-     private Integer id;
-     private String address;
-     private Date dateOfBirth;
-     private String email;
-     private String fullName;
-     private String mobile;
-     private String password;
-     private String phone;
-     private Date registrationDate;
-     private String userName;
+    private Integer id;
+    private String email;
+    private String address;
+    private String phone;
+    private String mobile;
+    private Date dateOfBirth;
+    private Date registrationDate;
+    private String userName;
+    private String password;
+    private String fullName;
+    private Set<Buyer> buyers = new HashSet<Buyer>(0);
+    private Seller seller;
 
     public User() {
     }
 
-	
-    public User(String address, String email, String password, Date registrationDate, String userName) {
-        this.address = address;
+
+    public User(String email, String address, Date registrationDate, String userName, String password) {
         this.email = email;
-        this.password = password;
+        this.address = address;
         this.registrationDate = registrationDate;
         this.userName = userName;
+        this.password = password;
     }
-    public User(String address, Date dateOfBirth, String email, String fullName, String mobile, String password, String phone, Date registrationDate, String userName) {
-       this.address = address;
-       this.dateOfBirth = dateOfBirth;
-       this.email = email;
-       this.fullName = fullName;
-       this.mobile = mobile;
-       this.password = password;
-       this.phone = phone;
-       this.registrationDate = registrationDate;
-       this.userName = userName;
+    public User(String email, String address, String phone, String mobile, Date dateOfBirth, Date registrationDate, String userName, String password, String fullName, Set<Buyer> buyers, Seller seller) {
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.mobile = mobile;
+        this.dateOfBirth = dateOfBirth;
+        this.registrationDate = registrationDate;
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+        this.buyers = buyers;
+        this.seller = seller;
     }
-   
-     @Id @GeneratedValue(strategy=IDENTITY)
 
-    
+    @Id @GeneratedValue(strategy=IDENTITY)
+
+
     @Column(name="id", unique=true, nullable=false)
     public Integer getId() {
         return this.id;
     }
-    
+
     public void setId(Integer id) {
         this.id = id;
     }
 
-    
+
+    @Column(name="email", nullable=false, length=50)
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
     @Column(name="address", nullable=false, length=150)
     public String getAddress() {
         return this.address;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    @Column(name="phone", length=45)
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+
+    @Column(name="mobile", length=45)
+    public String getMobile() {
+        return this.mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     @Temporal(TemporalType.DATE)
@@ -83,59 +121,9 @@ public class User  implements java.io.Serializable {
     public Date getDateOfBirth() {
         return this.dateOfBirth;
     }
-    
+
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    
-    @Column(name="email", nullable=false, length=50)
-    public String getEmail() {
-        return this.email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    
-    @Column(name="full_name", length=100)
-    public String getFullName() {
-        return this.fullName;
-    }
-    
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    
-    @Column(name="mobile", length=45)
-    public String getMobile() {
-        return this.mobile;
-    }
-    
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    
-    @Column(name="password", nullable=false, length=45)
-    public String getPassword() {
-        return this.password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    
-    @Column(name="phone", length=45)
-    public String getPhone() {
-        return this.phone;
-    }
-    
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     @Temporal(TemporalType.DATE)
@@ -143,19 +131,57 @@ public class User  implements java.io.Serializable {
     public Date getRegistrationDate() {
         return this.registrationDate;
     }
-    
+
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    
+
     @Column(name="user_name", nullable=false, length=45)
     public String getUserName() {
         return this.userName;
     }
-    
+
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+
+    @Column(name="password", nullable=false, length=45)
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    @Column(name="full_name", length=100)
+    public String getFullName() {
+        return this.fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="user")
+    public Set<Buyer> getBuyers() {
+        return this.buyers;
+    }
+
+    public void setBuyers(Set<Buyer> buyers) {
+        this.buyers = buyers;
+    }
+
+    @OneToOne(fetch=FetchType.LAZY, mappedBy="user")
+    public Seller getSeller() {
+        return this.seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
 
